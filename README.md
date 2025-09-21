@@ -1,7 +1,17 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/Unv3Nbtc)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=20618448&assignment_repo_type=AssignmentRepo)
+# Project Variant 3 - Photo Studio
+
+**Team members**: 
+- Patrik Tamm (@patam2)
+- Ramon Egert ()
+- Isabel Zimmerman ()
+
+A photo studio needs a system to manage customer orders for photo printing and film developing. Currently, orders are handled manually, which can lead to confusion and lost paperwork. This project will create a simple management system where receptionists take orders, photographers process them, and the system tracks materials used and calculates prices. Express orders cost 25% more, and the system will generate daily reports showing completed work and revenue. The goal is to replace paper-based processes with a digital system that keeps track of everything in one place.Retry
+
 # Student Project Template 
 ## Build & Run
+Build: make
+Run: make run
+Test: make test
 ## Release workflow
 - We keep ONE repository for the whole project.
 - At the end of each checkpoint, mark a release tag and add your report.
