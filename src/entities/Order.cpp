@@ -8,7 +8,7 @@ void Order::storeOrderDetails(const std::string& customer, const std::string& ph
     isExpress = false;
 }
 
-double Order::calculatePrice() {
+double Order::calculatePrice() const {
     double basePrice = 50.0;
     if (isExpress) {
         basePrice *= 1.25;

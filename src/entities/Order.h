@@ -12,7 +12,7 @@ private:
 
 public:
     void storeOrderDetails(const std::string& customer, const std::string& photos, const std::string& type);
-    double calculatePrice();
+    double calculatePrice() const;
     void trackOrderStatus(const std::string& newStatus);
     void trackMaterialsUsed(const std::string& materials);
     std::string getCustomerName() const;
