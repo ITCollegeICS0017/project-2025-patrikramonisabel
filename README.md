@@ -9,12 +9,9 @@ A photo studio needs a system to manage customer orders for photo printing and f
 
 # Student Project Template 
 ## Build & Run
-Build: make
-Run: make run
-Test: make test
-## Release workflow
-- We keep ONE repository for the whole project.
-- At the end of each checkpoint, mark a release tag and add your report.
+Build from fresh clone: `cmake -S . -B build && cmake --build build`
+
+The executable will be created at `build/Debug/photo_studio.exe` (Windows) or `build/photo_studio` (Linux/Mac).
 
 ### Mark a release tag
 ###  end of Release 1:
