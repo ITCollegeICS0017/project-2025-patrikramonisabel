@@ -7,5 +7,9 @@
 
 int main() {
     std::cout << "Photo Studio Management System" << std::endl;
+    Order order;
+    order.storeOrderDetails("Alice", "wedding_photos.zip", "Wedding");
+    order.setExpress(true);
+    std::cout << "Order for " << order.getCustomerName() << " with status: " << order.getStatus() << std::endl;
     return 0;
 }
