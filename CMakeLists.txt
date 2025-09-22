@@ -12,6 +12,5 @@ file(GLOB_RECURSE SOURCES
     "src/*.hpp"
 )
 
-list(FILTER SOURCES EXCLUDE REGEX ".*main\\.c$")
 
 add_executable(photo_studio ${SOURCES})
