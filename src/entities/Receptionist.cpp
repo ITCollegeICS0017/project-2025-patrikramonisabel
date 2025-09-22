@@ -1,13 +1,21 @@
 #include "Receptionist.h"
+#include <iostream>
 
 void Receptionist::takeCustomerOrder() {
-    // Placeholder implementation
+    std::cout << "Taking customer order..." << std::endl;
 }
 
 void Receptionist::createOrderRecord() {
-    // Placeholder implementation
+    currentOrder = new Order();
+    currentOrder->storeOrderDetails("Customer", "Photos", "Standard");
 }
 
 void Receptionist::setExpressOrderFlag() {
-    // Placeholder implementation
+    if (currentOrder) {
+        currentOrder->setExpress(true);
+    }
+}
+
+Order* Receptionist::getCurrentOrder() {
+    return currentOrder;
 }

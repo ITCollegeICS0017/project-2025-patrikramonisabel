@@ -1,20 +1,27 @@
 #include "Order.h"
 
 void Order::storeOrderDetails(const std::string& customer, const std::string& photos, const std::string& type) {
-    // Placeholder implementation
+    customerName = customer;
+    this->photos = photos;
+    orderType = type;
+    status = "Pending";
+    isExpress = false;
 }
 
 double Order::calculatePrice() {
-    // Placeholder implementation - base price + 25% if express
-    return 0.0;
+    double basePrice = 50.0;
+    if (isExpress) {
+        basePrice *= 1.25;
+    }
+    return basePrice;
 }
 
 void Order::trackOrderStatus(const std::string& newStatus) {
-    // Placeholder implementation
+    status = newStatus;
 }
 
 void Order::trackMaterialsUsed(const std::string& materials) {
-    // Placeholder implementation
+    materialsUsed = materials;
 }
 
 std::string Order::getCustomerName() const {

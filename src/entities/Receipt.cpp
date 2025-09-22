@@ -1,9 +1,12 @@
 #include "Receipt.h"
+#include <iostream>
 
 void Receipt::generateReceipt(const Order& order) {
-    // Placeholder implementation
+    customerName = order.getCustomerName();
+    totalAmount = order.calculatePrice();
+    receiptText = "Receipt for " + customerName + " - Total: $" + std::to_string(totalAmount);
 }
 
 void Receipt::printReceipt() {
-    // Placeholder implementation
+    std::cout << receiptText << std::endl;
 }

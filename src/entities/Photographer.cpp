@@ -1,13 +1,26 @@
 #include "Photographer.h"
+#include <iostream>
 
 void Photographer::processOrders() {
-    // Placeholder implementation
+    for (auto order : currentOrders) {
+        if (order->getStatus() == "Pending") {
+            order->trackOrderStatus("In Progress");
+        }
+    }
 }
 
 void Photographer::developPhotos() {
-    // Placeholder implementation
+    std::cout << "Developing photos..." << std::endl;
 }
 
 void Photographer::markOrderAsCompleted() {
-    // Placeholder implementation
+    for (auto order : currentOrders) {
+        if (order->getStatus() == "In Progress") {
+            order->trackOrderStatus("Completed");
+        }
+    }
+}
+
+void Photographer::addOrder(Order* order) {
+    currentOrders.push_back(order);
 }
