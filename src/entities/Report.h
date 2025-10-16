@@ -7,5 +7,5 @@ class Report {
 public:
     void generateDailyReport();
     void showCompletedOrders(const std::vector<Order>& orders);
-    double calculateDailyRevenue(const std::vector<Receipt>& receipts);
+    double calculateDailyRevenue(const std::vector<Receipt>& receipts) const;
 };

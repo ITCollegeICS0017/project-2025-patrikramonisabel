@@ -14,7 +14,7 @@ void Report::showCompletedOrders(const std::vector<Order>& orders) {
     }
 }
 
-double Report::calculateDailyRevenue(const std::vector<Receipt>& receipts) {
+double Report::calculateDailyRevenue(const std::vector<Receipt>& receipts) const {
     double totalRevenue = 0.0;
     for (const auto& receipt : receipts) {
         totalRevenue += 50.0;
