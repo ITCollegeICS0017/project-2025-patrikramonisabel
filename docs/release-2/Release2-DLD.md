@@ -15,3 +15,8 @@ This Detailed Level Design document describes the structure developed for the se
         * Report
 * Data layer (Storage)
    * In-memory storage for Release 2
+  
+    
+## UML Class Diagram
+
+![UML Class Diagram](images/UML_Diagram.png)
