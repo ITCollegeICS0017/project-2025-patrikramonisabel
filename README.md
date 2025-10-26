@@ -1,17 +1,92 @@
-# Project Variant 3 - Photo Studio
+# Project Variant 3 - Photo Studio Management System
 
 **Team members**: 
 - Patrik Tamm (@patam2)
 - Ramon Egert ()
 - Isabel Zimmermann (@iszimm)
 
-A photo studio needs a system to manage customer orders for photo printing and film developing. Currently, orders are handled manually, which can lead to confusion and lost paperwork. This project will create a simple management system where receptionists take orders, photographers process them, and the system tracks materials used and calculates prices. Express orders cost 25% more, and the system will generate daily reports showing completed work and revenue. The goal is to replace paper-based processes with a digital system that keeps track of everything in one place.Retry
+## Project Description
 
-# Student Project Template 
+A photo studio needs a system to manage customer orders for photo printing and film developing. Currently, orders are handled manually, which can lead to confusion and lost paperwork. This project creates a digital management system where:
+
+- Receptionists take customer orders
+- Photographers process and complete orders
+- System tracks materials used and order status
+- Express orders cost 25% more
+- Daily reports show completed work and revenue
+- All data managed in one centralized system
+
+## Features (Release 2)
+
+✅ **Order Management**
+- Create new orders with customer details
+- Mark orders as express (25% price increase)
+- Track order status (Pending → Processing → Completed)
+
+✅ **Workflow Processing**
+- Assign orders to photographers
+- Process and complete orders
+- Material/consumables tracking
+
+✅ **Receipt Generation**
+- Professional formatted receipts
+- Automatic price calculation
+- Customer information display
+
+✅ **Daily Reports**
+- List of completed orders
+- Total revenue calculation
+- Business analytics
+
+✅ **Three-Tier Architecture**
+- Presentation Layer (ConsoleUI)
+- Business Logic Layer (StudioManager & Entities)
+- Data Layer (In-memory storage)
+
 ## Build & Run
-Build from fresh clone: `cmake -S . -B build && cmake --build build`
 
-The executable will be created at `build/Debug/photo_studio.exe` (Windows) or `build/photo_studio` (Linux/Mac).
+### Build from fresh clone:
+```bash
+cmake -S . -B build && cmake --build build
+```
+
+### Run the application:
+**Windows:** `build/Debug/photo_studio.exe`  
+**Linux/Mac:** `build/photo_studio`
+
+### Quick start:
+```bash
+cd /Users/patriktamm/dev/ics0017/project-2025-patrikramonisabel
+mkdir -p build && cd build
+cmake ..
+make
+./photo_studio
+```
+
+## Usage
+
+The system provides an interactive menu:
+
+1. **Create New Order** - Add a new customer order
+2. **Process Order** - Assign order to photographer
+3. **Complete Order** - Mark order as completed
+4. **Generate Receipt** - Create and display receipt
+5. **View All Orders** - List all orders with status
+6. **Generate Daily Report** - View completed orders and revenue
+0. **Exit** - Close application
+
+## Architecture
+
+See `docs/release-2/Release2-DLD.md` for detailed design documentation.
+
+**Key Components:**
+- `ConsoleUI` - User interface layer
+- `StudioManager` - Business logic coordinator
+- `Order` - Order entity with price calculation
+- `Photographer` - Photo processing workflow
+- `Receipt` - Receipt generation
+- `Report` - Business reporting
+- `Receptionist` - Order intake management
 
 ### Mark a release tag
 ###  end of Release 1:

@@ -1,15 +1,18 @@
 #include <iostream>
-#include "entities/Order.h"
-#include "entities/Receipt.h"
-#include "entities/Photographer.h"
-#include "entities/Receptionist.h"
-#include "entities/Report.h"
+#include "entities/StudioManager.h"
+#include "ConsoleUI.h"
 
 int main() {
-    std::cout << "Photo Studio Management System" << std::endl;
-    Order order;
-    order.storeOrderDetails("Alice", "wedding_photos.zip", "Wedding");
-    order.setExpress(true);
-    std::cout << "Order for " << order.getCustomerName() << " with status: " << order.getStatus() << std::endl;
+    std::cout << "Initializing Photo Studio Management System...\n";
+    
+    // Create the business logic layer
+    StudioManager studioManager;
+    
+    // Create the presentation layer
+    ConsoleUI ui(studioManager);
+    
+    // Run the application
+    ui.run();
+    
     return 0;
 }

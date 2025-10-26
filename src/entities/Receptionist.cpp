@@ -1,21 +1,33 @@
 #include "Receptionist.h"
-#include <iostream>
 
-void Receptionist::takeCustomerOrder() {
-    std::cout << "Taking customer order..." << std::endl;
+Receptionist::Receptionist() : currentOrder(nullptr) {}
+
+Receptionist::~Receptionist() {
+    delete currentOrder;
 }
 
-void Receptionist::createOrderRecord() {
+bool Receptionist::createOrderRecord(const std::string& customerName, const std::string& photos, const std::string& orderType) {
+    clearCurrentOrder();
     currentOrder = new Order();
-    currentOrder->storeOrderDetails("Customer", "Photos", "Standard");
+    currentOrder->storeOrderDetails(customerName, photos, orderType);
+    return currentOrder != nullptr;
 }
 
-void Receptionist::setExpressOrderFlag() {
+bool Receptionist::setExpressOrderFlag(bool isExpress) {
     if (currentOrder) {
-        currentOrder->setExpress(true);
+        currentOrder->setExpress(isExpress);
+        return true;
     }
+    return false;
 }
 
-Order* Receptionist::getCurrentOrder() {
+Order* Receptionist::getCurrentOrder() const {
     return currentOrder;
+}
+
+void Receptionist::clearCurrentOrder() {
+    if (currentOrder) {
+        delete currentOrder;
+        currentOrder = nullptr;
+    }
 }

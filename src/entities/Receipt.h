@@ -10,5 +10,7 @@ private:
 
 public:
     void generateReceipt(const Order& order);
-    void printReceipt();
+    std::string getReceiptText() const;
+    double getTotalAmount() const;
+    std::string getCustomerName() const;
 };

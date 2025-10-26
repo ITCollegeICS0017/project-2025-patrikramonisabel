@@ -7,8 +7,10 @@ private:
     std::vector<Order*> currentOrders;
 
 public:
-    void processOrders();
-    void developPhotos();
-    void markOrderAsCompleted();
+    int processOrders();
+    bool developPhotos();
+    int markOrderAsCompleted();
     void addOrder(Order* order);
+    std::vector<Order*> getCurrentOrders() const;
+    int getOrderCount() const;
 };

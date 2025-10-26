@@ -33,7 +33,7 @@ bool StudioManager::generateReceipt(int orderIndex) {
         Receipt receipt;
         receipt.generateReceipt(orders[orderIndex]);
         receipts.push_back(receipt);
-        receipt.printReceipt();
+        std::cout << receipt.getReceiptText();
         return true;
     }
     return false;
