@@ -8,7 +8,7 @@ void Report::generateDailyReport() {
 void Report::showCompletedOrders(const std::vector<Order>& orders) {
     std::cout << "Completed Orders:" << std::endl;
     for (const auto& order : orders) {
-        if (order.getStatus() == "Completed") {
+        if (order.getStatus() == OrderStatus::COMPLETED) {
             std::cout << "- " << order.getCustomerName() << std::endl;
         }
     }
@@ -17,7 +17,7 @@ void Report::showCompletedOrders(const std::vector<Order>& orders) {
 double Report::calculateDailyRevenue(const std::vector<Receipt>& receipts) const {
     double totalRevenue = 0.0;
     for (const auto& receipt : receipts) {
-        totalRevenue += 50.0;
+        totalRevenue += receipt.getTotalAmount();
     }
     return totalRevenue;
 }

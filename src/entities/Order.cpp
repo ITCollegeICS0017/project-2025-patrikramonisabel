@@ -4,19 +4,19 @@ void Order::storeOrderDetails(const std::string& customer, const std::string& ph
     customerName = customer;
     this->photos = photos;
     orderType = type;
-    status = "Pending";
+    status = OrderStatus::PENDING;
     isExpress = false;
 }
 
 double Order::calculatePrice() const {
-    double basePrice = 50.0;
+    double price = BASE_PRICE;
     if (isExpress) {
-        basePrice *= 1.25;
+        price *= EXPRESS_MULTIPLIER;
     }
-    return basePrice;
+    return price;
 }
 
-void Order::trackOrderStatus(const std::string& newStatus) {
+void Order::trackOrderStatus(OrderStatus newStatus) {
     status = newStatus;
 }
 
@@ -28,8 +28,23 @@ std::string Order::getCustomerName() const {
     return customerName;
 }
 
-std::string Order::getStatus() const {
+OrderStatus Order::getStatus() const {
     return status;
+}
+
+std::string Order::getStatusString() const {
+    switch (status) {
+        case OrderStatus::PENDING:
+            return "Pending";
+        case OrderStatus::PROCESSING:
+            return "Processing";
+        case OrderStatus::IN_PROGRESS:
+            return "In Progress";
+        case OrderStatus::COMPLETED:
+            return "Completed";
+        default:
+            return "Unknown";
+    }
 }
 
 bool Order::getIsExpress() const {

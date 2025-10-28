@@ -121,7 +121,7 @@ void ConsoleUI::handleViewAllOrders() {
         std::cout.width(22);
         std::cout << std::left << orders[i].getCustomerName() << " | ";
         std::cout.width(11);
-        std::cout << std::left << orders[i].getStatus() << " | ";
+        std::cout << std::left << orders[i].getStatusString() << " | ";
         std::cout << (orders[i].getIsExpress() ? "Yes" : "No") << "\n";
     }
 }

@@ -14,7 +14,7 @@ bool StudioManager::createNewOrder(const std::string& customerName, const std::s
 bool StudioManager::processOrder(int orderIndex) {
     if (orderIndex >= 0 && orderIndex < orders.size()) {
         photographer.addOrder(&orders[orderIndex]);
-        orders[orderIndex].trackOrderStatus("Processing");
+        orders[orderIndex].trackOrderStatus(OrderStatus::PROCESSING);
         return true;
     }
     return false;
@@ -22,7 +22,7 @@ bool StudioManager::processOrder(int orderIndex) {
 
 bool StudioManager::completeOrder(int orderIndex) {
     if (orderIndex >= 0 && orderIndex < orders.size()) {
-        orders[orderIndex].trackOrderStatus("Completed");
+        orders[orderIndex].trackOrderStatus(OrderStatus::COMPLETED);
         return true;
     }
     return false;

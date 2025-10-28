@@ -3,8 +3,8 @@
 int Photographer::processOrders() {
     int processedCount = 0;
     for (auto order : currentOrders) {
-        if (order->getStatus() == "Pending") {
-            order->trackOrderStatus("In Progress");
+        if (order->getStatus() == OrderStatus::PENDING) {
+            order->trackOrderStatus(OrderStatus::IN_PROGRESS);
             processedCount++;
         }
     }
@@ -19,8 +19,8 @@ bool Photographer::developPhotos() {
 int Photographer::markOrderAsCompleted() {
     int completedCount = 0;
     for (auto order : currentOrders) {
-        if (order->getStatus() == "In Progress") {
-            order->trackOrderStatus("Completed");
+        if (order->getStatus() == OrderStatus::IN_PROGRESS) {
+            order->trackOrderStatus(OrderStatus::COMPLETED);
             completedCount++;
         }
     }

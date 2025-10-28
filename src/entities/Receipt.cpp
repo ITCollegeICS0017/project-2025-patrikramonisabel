@@ -12,7 +12,7 @@ void Receipt::generateReceipt(const Order& order) {
     ss << "========================================\n";
     ss << "Customer: " << customerName << "\n";
     ss << "Order Type: " << (order.getIsExpress() ? "Express" : "Standard") << "\n";
-    ss << "Status: " << order.getStatus() << "\n";
+    ss << "Status: " << order.getStatusString() << "\n";
     ss << "----------------------------------------\n";
     ss << "Total Amount: $" << std::fixed << std::setprecision(2) << totalAmount << "\n";
     ss << "========================================\n";
