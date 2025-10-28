@@ -37,7 +37,7 @@ This Detailed Level Design document describes the structure developed for the se
 
 The following UML class diagram illustrates the complete system architecture, showing all classes, their relationships, and the three-tier architecture:
 
-![UML Class Diagram](images/UML_Diagram.png)
+![UML Class Diagram](images/Team17_Release2_UML_Diagram.png)
 
 ### Class Relationships
 
@@ -77,11 +77,11 @@ The following UML class diagram illustrates the complete system architecture, sh
 The following screenshots show the implemented system in action:
 
 #### Screenshot 1: Order Creation and Management
-![Order Management Screenshot](images/Screenshot_2025-10-28_200836.webp)
+![Order Management Screenshot](images/Team17_Release2_diagram1.webp)
 
 
 #### Screenshot 2: Receipt Generation and Reports
-![Receipt and Reports Screenshot](images/Screenshot_2025-10-28_200843.webp)
+![Receipt and Reports Screenshot](images/Team17_Release2_diagram2.webp)
 
 
 ## Class Details
