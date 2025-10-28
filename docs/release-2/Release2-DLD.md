@@ -31,6 +31,59 @@ This Detailed Level Design document describes the structure developed for the se
 * Business logic layer returns values instead of void
 * Proper separation of concerns across all three layers
 
+## 3. UML Class Diagram
+
+### System Architecture Diagram
+
+The following UML class diagram illustrates the complete system architecture, showing all classes, their relationships, and the three-tier architecture:
+
+![UML Class Diagram](images/UML_Diagram.png)
+
+### Class Relationships
+
+**StudioManager (Coordinator)**
+- Owns collection of `Order` objects (1..*)
+- Owns collection of `Receipt` objects (1..*)
+- Has one `Photographer` instance
+- Has one `Report` instance
+- Acts as the central coordinator for all business operations
+
+**Order (Entity)**
+- Uses `OrderStatus` enum for type-safe status management
+- Contains pricing constants (`BASE_PRICE`, `EXPRESS_MULTIPLIER`)
+- Independent entity that can exist without other classes
+
+**Receipt (Entity)**
+- Depends on `Order` for generation
+- Created by StudioManager
+- Immutable once generated
+
+**Photographer (Workflow Manager)**
+- Maintains references to `Order*` objects in processing queue
+- Does not own orders, just manages references
+
+**Report (Analytics)**
+- Stateless service class
+- Operates on collections passed to it
+- No internal state or dependencies
+
+**ConsoleUI (Presentation)**
+- Depends on `StudioManager` only
+- Never directly accesses entities or data
+- Follows strict layering principle
+
+### Implementation Screenshots
+
+The following screenshots show the implemented system in action:
+
+#### Screenshot 1: Order Creation and Management
+![Order Management Screenshot](images/Screenshot_2025-10-28_200836.webp)
+
+
+#### Screenshot 2: Receipt Generation and Reports
+![Receipt and Reports Screenshot](images/Screenshot_2025-10-28_200843.webp)
+
+
 ## Class Details
 
 ### StudioManager
