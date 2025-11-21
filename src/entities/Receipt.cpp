@@ -1,8 +1,14 @@
 #include "Receipt.h"
-#include <sstream>
+#include "StudioExceptions.h"
 #include <iomanip>
+#include <sstream>
 
-void Receipt::generateReceipt(const Order& order) {
+void Receipt::generateReceipt(const Order& order, int orderIndex) {
+    if (orderIndex < 0) {
+        throw RepositoryException("Invalid order reference for receipt.");
+    }
+
+    orderId = orderIndex;
     customerName = order.getCustomerName();
     totalAmount = order.calculatePrice();
     
@@ -30,4 +36,8 @@ double Receipt::getTotalAmount() const {
 
 std::string Receipt::getCustomerName() const {
     return customerName;
+}
+
+int Receipt::getOrderId() const {
+    return orderId;
 }
