@@ -79,5 +79,7 @@ All exceptions bubble back to the UI, which owns the only `try/catch` blocks and
 
 | Version | Date | Description |
 | --- | --- | --- |
+| 1.0 | 2025-09-23 | Release 1 contains boilerplate code and initial planning. |
+| 2.0 | 2025-10-28 | Release 2 provides most functional code. |
 | 3.0 | 2025-11-21 | Added Release 3 validation table, behavioral diagrams for `generateReceipt`, updated exception policy, and synchronized code with the documented guards. |
 
