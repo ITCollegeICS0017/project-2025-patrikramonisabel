@@ -75,21 +75,24 @@ namespace {
         }
     }
 
-    void ensureOrderIndexWithinBounds(const std::vector<Order>& orders, int index) {
-        if (index < 0 || index >= static_cast<int>(orders.size())) {
+    void ensureOrderIndexWithinBounds(const OrderRepository& repository, int index) {
+        if (index < 0 || index >= static_cast<int>(repository.size())) {
             throw BusinessRuleException("Please select a valid order number from the list.");
         }
     }
 
-    bool hasOpenOrderWithName(const std::vector<Order>& orders, const std::string& customerName) {
-        return std::any_of(
-            orders.begin(),
-            orders.end(),
-            [&](const Order& existing) {
-                return existing.getCustomerName() == customerName &&
-                       existing.getStatus() != OrderStatus::COMPLETED;
+    bool hasOpenOrderWithName(const OrderRepository& repository, const std::string& customerName) {
+        for (int i = 0; i < static_cast<int>(repository.size()); ++i) {
+            const Order* existing = repository.tryGet(i);
+            if (!existing) {
+                continue;
             }
-        );
+            if (existing->getCustomerName() == customerName &&
+                existing->getStatus() != OrderStatus::COMPLETED) {
+                return true;
+            }
+        }
+        return false;
     }
 
     bool receiptExistsForOrder(const std::vector<Receipt>& receipts, int orderIndex) {
@@ -103,6 +106,9 @@ namespace {
     }
 }
 
+StudioManager::StudioManager(OrderRepository& repositoryRef)
+    : repository(repositoryRef) {}
+
 bool StudioManager::createNewOrder(const std::string& customerName, const std::string& photos, 
                                     const std::string& orderType, bool isExpress) {
     const std::string sanitizedName = trimCopy(customerName);
@@ -113,22 +119,27 @@ bool StudioManager::createNewOrder(const std::string& customerName, const std::s
     ensurePhotosValid(sanitizedPhotos);
     ensureOrderTypeValid(sanitizedOrderType);
 
-    if (hasOpenOrderWithName(orders, sanitizedName)) {
+    if (hasOpenOrderWithName(repository, sanitizedName)) {
         throw BusinessRuleException("This customer already has an active order today.");
     }
 
     Order newOrder;
     newOrder.storeOrderDetails(sanitizedName, sanitizedPhotos, sanitizedOrderType);
     newOrder.setExpress(isExpress);
-    orders.push_back(newOrder);
+    repository.add(newOrder);
     
     return true;
 }
 
 bool StudioManager::processOrder(int orderIndex) {
-    ensureOrderIndexWithinBounds(orders, orderIndex);
+    ensureOrderIndexWithinBounds(repository, orderIndex);
 
-    Order& order = orders[orderIndex];
+    Order* orderPtr = repository.tryGet(orderIndex);
+    if (orderPtr == nullptr) {
+        throw RepositoryException("Order storage unavailable.");
+    }
+
+    Order& order = *orderPtr;
     if (order.getStatus() != OrderStatus::PENDING) {
         throw BusinessRuleException("Only pending orders can be sent to the photographer.");
     }
@@ -139,9 +150,14 @@ bool StudioManager::processOrder(int orderIndex) {
 }
 
 bool StudioManager::completeOrder(int orderIndex) {
-    ensureOrderIndexWithinBounds(orders, orderIndex);
+    ensureOrderIndexWithinBounds(repository, orderIndex);
 
-    Order& order = orders[orderIndex];
+    Order* orderPtr = repository.tryGet(orderIndex);
+    if (orderPtr == nullptr) {
+        throw RepositoryException("Order storage unavailable.");
+    }
+
+    Order& order = *orderPtr;
     if (order.getStatus() == OrderStatus::COMPLETED) {
         throw BusinessRuleException("This order is already completed.");
     }
@@ -155,9 +171,14 @@ bool StudioManager::completeOrder(int orderIndex) {
 }
 
 bool StudioManager::generateReceipt(int orderIndex) {
-    ensureOrderIndexWithinBounds(orders, orderIndex);
+    ensureOrderIndexWithinBounds(repository, orderIndex);
 
-    const Order& order = orders[orderIndex];
+    const Order* orderPtr = repository.tryGet(orderIndex);
+    if (orderPtr == nullptr) {
+        throw RepositoryException("Order storage unavailable.");
+    }
+
+    const Order& order = *orderPtr;
     if (order.getStatus() != OrderStatus::COMPLETED) {
         throw BusinessRuleException("Receipts are available only for completed orders.");
     }
@@ -175,20 +196,21 @@ bool StudioManager::generateReceipt(int orderIndex) {
 
 double StudioManager::generateDailyReport() {
     report.generateDailyReport();
-    report.showCompletedOrders(orders);
+    report.showCompletedOrders(repository.toVector());
     double revenue = report.calculateDailyRevenue(receipts);
     return revenue;
 }
 
 std::vector<Order> StudioManager::getAllOrders() const {
-    return orders;
+    return repository.toVector();
 }
 
 Order* StudioManager::getOrder(int index) {
-    if (index >= 0 && index < orders.size()) {
-        return &orders[index];
-    }
-    return nullptr;
+    return repository.tryGet(index);
+}
+
+const Order* StudioManager::getOrder(int index) const {
+    return repository.tryGet(index);
 }
 
 double StudioManager::calculateTotalRevenue() const {

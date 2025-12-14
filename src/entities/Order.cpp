@@ -28,6 +28,14 @@ std::string Order::getCustomerName() const {
     return customerName;
 }
 
+std::string Order::getPhotosDescription() const {
+    return photos;
+}
+
+std::string Order::getOrderType() const {
+    return orderType;
+}
+
 OrderStatus Order::getStatus() const {
     return status;
 }
@@ -53,4 +61,8 @@ bool Order::getIsExpress() const {
 
 void Order::setExpress(bool express) {
     isExpress = express;
+}
+
+std::string Order::getMaterialsUsed() const {
+    return materialsUsed;
 }

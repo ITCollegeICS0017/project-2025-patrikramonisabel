@@ -27,8 +27,11 @@ public:
     void trackOrderStatus(OrderStatus newStatus);
     void trackMaterialsUsed(const std::string& materials);
     std::string getCustomerName() const;
+    std::string getPhotosDescription() const;
+    std::string getOrderType() const;
     OrderStatus getStatus() const;
     std::string getStatusString() const;
     bool getIsExpress() const;
+    std::string getMaterialsUsed() const;
     void setExpress(bool express);
 };
